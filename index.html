@@ -1,0 +1,39 @@
+<meta charset="UTF-8"> 
+
+<style>
+  body {
+    background-color: black;
+    color: #baf;
+    font-family: helvetica;
+  }
+  div {
+    margin: auto;
+  }
+  .greeting {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-areas: "left bout"
+                         "arou nda";
+  }
+  .greeting .name-chunk {
+    font-size: 20vh;
+    text-align: center;
+  }
+</style>
+
+<html>
+<head>
+  <title>
+  leftaroundabout
+  </title>
+</head>
+<body>
+  <div class="greeting">
+     <div class="name-chunk" style="grid-area: left; transform: rotate(135deg)">left</div>
+     <div class="name-chunk" style="grid-area: arou; transform: rotate( 45deg)">arou</div>
+     <div class="name-chunk" style="grid-area: nda ; transform: rotate(-45deg)">nda</div>
+     <div class="name-chunk" style="grid-area: bout; transform: rotate(-90deg)">bout</div>
+  </div>
+</body>
+</html>
