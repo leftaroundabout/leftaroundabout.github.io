@@ -13,6 +13,12 @@
     display: flex;
     flex-direction: row;
   }
+  textarea {
+    background-color: #111;
+    color: #fdc;
+    width: 640px;
+    height: 480px;
+  }
 </style>
 
 <html>
@@ -24,7 +30,39 @@
 <body>
   <div class="output-vs-source">
     <iframe src="https://yeamer.dime-chime.com" width="640" height="480"></iframe>
-    <iframe src="https://github.com/leftaroundabout/beamonad/blob/master/demo/Main.hs" width="640" height="480"></iframe>
+    <textarea>
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE QuasiQuotes       #-}
+
+import Presentation.Yeamer
+import Presentation.Yeamer.Maths
+
+import Text.Cassius
+
+import Data.Semigroup
+import Data.Semigroup.Numbered
+
+import qualified Diagrams.Prelude as Dia
+import qualified Diagrams.Backend.Cairo as Dia
+
+main :: IO ()
+main = yeamer . styling style $ do
+   ""
+    ──
+    "main-title"#%"The Yeamer Presentation Engine"
+    ──
+    "Click anywhere to start demo"
+   
+   "Idea"
+    ======
+    "Beamonad/Yeamer is a Haskell eDSL for writing screen presentations."
+     ── do
+     "It is based on a free-monad like data structure, with monad "&lt;&gt;verb"&gt;&gt;"
+      &lt;&gt;" representing sequencing of slides in the presentation. Thus, if"
+      &lt;&gt;" you click "&lt;&gt;emph"here..."
+     "...the viewer will switch to the next item in the containing "&lt;&gt;verb"do"
+      &lt;&gt;"-block. Use "&lt;&gt;verb"ctrl+click"&lt;&gt;" to revert this."
+    </textarea>
   </div>
 </body>
 </html>
