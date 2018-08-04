@@ -62,6 +62,118 @@ main = yeamer . styling style $ do
       &lt;&gt;" you click "&lt;&gt;emph"here..."
      "...the viewer will switch to the next item in the containing "&lt;&gt;verb"do"
       &lt;&gt;"-block. Use "&lt;&gt;verb"ctrl+click"&lt;&gt;" to revert this."
+
+   "Slide content Ⅰ"
+    ====== do
+     "Yeamer uses your web browser for rendering the slides. Therefore you can"
+        &lt;&gt;" in principle insert any HTML code, e.g. though Hamlet quasi quotes."
+       ──"In most cases, it is however recommended to simply use the "
+        &lt;&gt;verb"OverloadedStrings"&lt;&gt;" extension so text can be written in ordinary"
+        &lt;&gt;" Haskell string literals, and to combine elements with monoid operators."
+     
+     "(You don't need to worry about &lt;special&gt; characters &amp;other; HTML pitfalls"
+      &lt;&gt;" – anything you put in a string literal will appear as-is.)"
+
+     "For the layout, we don't re-invent the wheel: CSS does that job fine."
+      ──styling ([cassius|
+              .reddened
+                  color: #f88
+              .caps
+                  font-size: 85%
+                  text-transform: uppercase |]())
+         ("You can at any point add "&lt;&gt; "reddened"#%"rules" &lt;&gt;" for"
+         &lt;&gt;"caps"#%"css"&lt;&gt;" styling. Usually it's best to do it just once"
+         &lt;&gt;" globally, and define "&lt;&gt;emph"small helper functions"&lt;&gt;" for details.")
+
+   "Slide composition"
+    ====== do
+     "There are three different ways in which "&lt;&gt;verb"Presentation"
+                  &lt;&gt;" is a semigroup, allowing you to put together slides"
+                  &lt;&gt;" out of content chunks:"
+      ── do
+      "The standard Monoid operator "&lt;&gt;verb"&lt;&gt;"&lt;&gt;" simply concatenates"
+       &lt;&gt;" text elements, or else brings the content as close together as possible."
+      "The stacking operator "&lt;&gt;verb"──"
+       ──"puts one element on top"
+       ──"of another."
+      (verb"==="&lt;&gt;"is an ASCII alternative,")
+       ==="it does the same thing."
+       ━━"So does "&lt;&gt;verb"━━"&lt;&gt;", except it has lower precedence."
+      "The siding operator "&lt;&gt;verb"│"&lt;&gt;"puts one element beside another."
+       ┃ "Alternatives: "&lt;&gt;verb"|||"&lt;&gt;" and "&lt;&gt;verb"┃"&lt;&gt;"."
+     
+     "All of these operators can be used together," │ "in any nesting."
+                    ──
+       "This allows arranging elements on a slide in an almost “WYSiWYG-like” way."
+      ┃
+        "At the browser level, this is implemented with CSS3 grids, which"
+            &lt;&gt;" automatically negotiate suitable width, height, and word-wrap"
+            &lt;&gt;" for each cell."
+   
+   "Slide content Ⅱ"
+    ====== do
+     "Static images can be included with "&lt;&gt;verb"imageFromFile"&lt;&gt;"."
+      ──
+      imageFromFile "img/beamonad.svg"
+     
+     "Especially for mathematical or data plots, it can make sense to generate"
+       &lt;&gt;" the images on-the-fly right from the Haskell code. You can use"
+       &lt;&gt;" anything that's able to generate image files, most popular being the "
+       &lt;&gt;verb"diagrams"&lt;&gt;" library."
+      ── do
+       imageFromDiagram (let line = Dia.fromVertices [0 Dia.^&amp; 0, 1 Dia.^&amp; 0.1]
+                         in Dia.lc Dia.green . Dia.lwO 3 $ line Dia.=== line)
+       "It is "&lt;&gt;emph"not"&lt;&gt;" necessary to come up with filenames for such images."
+        &lt;&gt;small(" (Internally, "&lt;&gt;verb"yeamer"&lt;&gt;" will use automatic filenames based"
+                &lt;&gt;" on the hashed image content.)")
+     "Other content that can easily be included: videos, maths equations,"
+       &lt;&gt;" step-by-step animations..."
+      ──"You come up with the next idea!"
+   
+   return ()
+
+
+imageFromDiagram :: Dia.Diagram Dia.Cairo -&gt; Presentation
+imageFromDiagram dia = imageFromFileSupplier "png"
+           $ \tgtFile -&gt; Dia.renderCairo tgtFile
+                           (Dia.mkSizeSpec $ Just 400 Dia.^&amp; Just 200) dia
+
+
+style = [cassius|
+   body
+     height: 100vh
+     color: #fc8
+     background-color: #205
+     font-size: 6vmin
+     font-family: "Linux libertine", "Times New Roman"
+   .main-title
+     font-size: 180%
+   h1
+     font-size: 150%
+   div
+     width: 95%
+     height: 95%
+     text-align: center
+     margin: auto
+   .headed-container
+     height: 80%
+   .vertical-concatenation
+     display: flex
+     flex-direction: column
+   .emph
+     font-style: italic
+   .small
+     font-size: 67%
+   .verb
+     display: inline-block
+     font-size: 86%
+     background-color: #227
+     font-family: "Ubuntu Mono", "Droid Sans mono", "Courier New"
+
+  |] ()
+emph = ("emph"#%)
+verb = ("verb"#%)
+small = ("small"#%)
     </textarea>
   </div>
 </body>
