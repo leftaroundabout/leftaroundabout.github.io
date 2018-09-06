@@ -22,6 +22,13 @@
   @supports(display: grid) {
     .grid-unsupported-warning { display: none; }
   }
+  .grid-unsupported-warning {
+    border: 3px solid #ff0000;
+    background-color: #500;
+    border-radius: 5px;
+    padding: 10px;
+    width: 400px;
+  }
 </style>
 
 <html>
@@ -36,7 +43,8 @@
   and next to it the full Haskell source code that defines it.
   <hr>
   <div class="grid-unsupported-warning"><b>Warning:</b>
-   you appear to be using an old web browser that does not support CSS grids.
+   you appear to be using an old web browser that does not support
+   <a href="https://www.w3.org/TR/css-grid-1/">CSS grids</a>.
    Yeamer requires this feature. Layout will be mangled.
   </div>
   <div class="output-vs-source">
