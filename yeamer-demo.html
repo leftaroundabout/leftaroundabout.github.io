@@ -3,11 +3,22 @@
 <style>
   body {
     background-color: black;
-    color: #cbe;
+    color: #c0b4e8;
     font-family: helvetica;
   }
   div {
     margin: auto;
+  }
+  a {
+    color: #34f;
+  }
+  a:hover {
+    color: #3377ff;
+  }
+  .herald {
+    width: 100%;
+    background-image: linear-gradient(#444, #002);
+    padding: 5px;
   }
   .output-vs-source {
     display: flex;
@@ -38,9 +49,11 @@
   </title>
 </head>
 <body>
-  Below see an example presentation written with
-  <a href="https://github.com/leftaroundabout/beamonad">the Yeamer eDSL</a>,
-  and next to it the full Haskell source code that defines it.
+  <div class="herald">
+    Below see an example presentation written with
+    <a href="https://github.com/leftaroundabout/beamonad">the Yeamer eDSL</a>,
+    and next to it the full Haskell source code that defines it.
+  </div>
   <hr>
   <div class="grid-unsupported-warning"><b>Warning:</b>
    you appear to be using an old web browser that does not support
