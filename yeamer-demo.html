@@ -19,6 +19,9 @@
     width: 640px;
     height: 480px;
   }
+  @supports(display: grid) {
+    .grid-unsupported-warning { display: none; }
+  }
 </style>
 
 <html>
@@ -32,6 +35,10 @@
   <a href="https://github.com/leftaroundabout/beamonad">the Yeamer eDSL</a>,
   and next to it the full Haskell source code that defines it.
   <hr>
+  <div class="grid-unsupported-warning"><b>Warning:</b>
+   you appear to be using an old web browser that does not support CSS grids.
+   Yeamer requires this feature. Layout will be mangled.
+  </div>
   <div class="output-vs-source">
     <iframe src="https://yeamer.dime-chime.com" width="640" height="480"></iframe>
     <textarea readonly>
